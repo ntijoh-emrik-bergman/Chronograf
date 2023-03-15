@@ -1,6 +1,5 @@
 //Emrik Bergman 2B
-//chronograf
-
+//chronograph
 
 #include <U8glib.h>
 #include <Arduino.h>
@@ -17,10 +16,10 @@ float speed;
 
 void setup() {
   Serial.begin(9600); // start serial communication
-  u8g.setFont(u8g_font_6x10);
+  u8g.setFont(u8g_font_helvB10); // Set font to helvetica
   u8g.firstPage();
   do {
-    u8g.drawStr(0, 10, "Initializing...");
+    u8g.drawStr(0, 13, "Initializing...");
   } while ( u8g.nextPage() );
   pinMode(LDR1, INPUT);
   pinMode(LDR2, INPUT);
@@ -28,8 +27,12 @@ void setup() {
 }
 
 void loop() {
+  //in: ldrvalues
+  //out: None
+  //do: Measures the time that it takes for a projectile to travel between LDR1 and LDR2 and calculates the speed based on a preset distance and displays the resuölt on an oled screen
   int ldr1Value = analogRead(LDR1);
   int ldr2Value = analogRead(LDR2);
+  //Serial.print(ldr1Value);
 
   
 
@@ -44,8 +47,8 @@ void loop() {
     Serial.println(" m/s");
     u8g.firstPage();
     do {
-      u8g.drawStr(0, 10, "Projectile speed:");
-      u8g.drawStr(0, 20, (String(speed) + " m/s").c_str());
+      u8g.drawStr(0, 14, "Projectile speed:");
+      u8g.drawStr(0, 28, (String(speed) + " m/s").c_str());
     } while ( u8g.nextPage() );
   }
 }
